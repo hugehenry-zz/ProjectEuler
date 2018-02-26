@@ -1,5 +1,5 @@
 def evenfib(upp_lim):
-	# Return the sum of all even fibonacci numbers from 1 to upp_lim
+	# Return the sum of all even fibonacci numbers from 1 to upp_lim.
 	tot_sum = 0
 	# Save the last two fib numbers
 	fib_a = 0
