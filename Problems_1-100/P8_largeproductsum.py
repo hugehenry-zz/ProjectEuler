@@ -1,4 +1,5 @@
 def largeprod(num):
+	# Return the largest product of 4 numbers within the given number.
 	large_sum = 0
 	num_list = list(str(num))
 	for i in range(len(num_list ) - 13):
