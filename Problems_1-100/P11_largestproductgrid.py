@@ -1,6 +1,34 @@
-def prodgrid():
-
+def itirator(nr_array, factors):
+	
+	grid_length = len(nr_array[0])
 	largest_prod = 0
+	
+	for method in range(4):
+
+		for left_right in range(grid_length - factors): # left-right index
+
+				for top_down in range(grid_length - factors): # top-down index
+					temp_pro = 1
+					
+					for factor in range(factors): # multiplying each of the four factors
+						
+						if method == 0: # horizontal
+							temp_pro = temp_pro * nr_array[left_right][top_down + factor]
+						if method == 1: # vertical
+							temp_pro = temp_pro * nr_array[top_down + factor][left_right]
+						if method == 2: # diagonal, leaning left
+							temp_pro = temp_pro * nr_array[top_down + factor][left_right + factor]
+						if method == 3: # diagonal, leaning right
+										# add the "19 - " to make it start in the top right
+							temp_pro *= nr_array[top_down + factor][grid_length - 1 - (left_right + factor)]
+
+					if temp_pro > largest_prod:
+						largest_prod = temp_pro
+
+	return largest_prod
+
+def prodgrid():
+	# Return the largest product of 4 numbers within the matrice.
 	nr_array = [[8, 2, 22, 97, 38, 15, 0, 40, 0, 75, 4, 5, 7, 78, 52, 12, 50, 77, 91, 8],
 			[49, 49, 99, 40, 17, 81, 18, 57, 60, 87, 17, 40, 98, 43, 69, 48, 4, 56, 62, 0],
 			[81, 49, 31, 73, 55, 79, 14, 29, 93, 71, 40, 67, 53, 88, 30, 3, 49, 13, 36, 65],
@@ -22,32 +50,6 @@ def prodgrid():
 			[20, 73, 35, 29, 78, 31, 90, 1, 74, 31, 49, 71, 48, 86, 81, 16, 23, 57, 5, 54],
 			[1, 70, 54, 71, 83, 51, 54, 69, 16, 92, 33, 48, 61, 43, 52, 1, 89, 19, 67, 48]]
 
-	fac = 4 # number of factors to multiply
+	return itirator(nr_array, 4)
 
-	# first itirate over the rows horizontally
-	for hor_row in range(20):
-
-		for row_index in range(20 - fac): # 4 equals the number of factors to multiply
-			
-			temp_pro = 1
-			for four_fac in range(fac): # same number should go here
-				temp_pro = temp_pro * nr_array[hor_row][row_index + four_fac]
-
-			if temp_pro > largest_prod:
-				largest_prod = temp_pro
-
-	# then itirate over the rows 
-	for ver_row in range(20):
-
-		for row_index in range(20 - fac): # 4 equals the number of factors to multiply
-			
-			temp_pro = 1
-			for four_fac in range(fac): # same number should go here
-				temp_pro = temp_pro * nr_array[row_index + four_fac][ver_row]
-
-			if temp_pro > largest_prod:
-				largest_prod = temp_pro
-
-	return largest_prod
-	
 print(prodgrid())
